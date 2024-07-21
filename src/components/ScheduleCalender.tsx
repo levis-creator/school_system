@@ -32,7 +32,6 @@ const ScheduleCalender = () => {
     dateTime.map((item) =>
       item.date === day ? (taskItems = item.tasks) : null
     );
-    console.log(date);
     return taskItems;
   };
   const renderCell = (date: any) => {
@@ -45,13 +44,13 @@ const ScheduleCalender = () => {
     }
   };
   return (
-    <div>
+    <>
       <Calendar
         compact
         renderCell={renderCell}
-        className="w-96 p-3 shadow-md rounded-lg bg-white "
+        className="hidden w-96 p-3 shadow-md rounded-lg bg-white "
       />
-    </div>
+    </>
   );
 };
 

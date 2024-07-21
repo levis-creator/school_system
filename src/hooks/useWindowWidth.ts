@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 
 // Define a custom hook to track window width
 function useWindowWidth(): number {
-  // Initialize state with the current window width
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  // Get the initial window width on the server (if applicable) or client
+  const initialWidth = typeof window !== "undefined" ? window.innerWidth : 0;
+
+  // Initialize state with the initial width
+  const [windowWidth, setWindowWidth] = useState<number>(initialWidth);
 
   useEffect(() => {
     // Define the handler function to update the width
