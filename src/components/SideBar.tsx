@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { FC } from "react";
+import { Animation } from "rsuite";
 interface SideBarProps {
   isOpen: boolean;
   open_menu: () => void;
@@ -57,31 +58,37 @@ const SideBar: FC<SideBarProps> = ({ isOpen, open_menu, windowWidth }) => {
   const openStyle = handleOpenStyle();
 
   return (
-    <aside className={`${openStyle} static top-0 left-0 z-40 w-64 h-screen`}>
-      <div className={`h-full px-3 py-4 overflow-y-auto bg-white`}>
-        <ul className="space-y-2 font-medium">
-          <li className="flex items-center justify-center">
-            {!isOpen ? (
-              <span className="font-serif text-4xl block text-center text-blue-600">
-                S
-              </span>
-            ) : (
-              <Image
-                src="/assets/images/schoolpre-high-resolution-logo-transparent.png"
-                width={0}
-                height={0}
-                alt="logo"
-                unoptimized
-                className="h-20 w-auto "
-              />
-            )}
-          </li>
-          {menu_list.map((item, i) => (
-            <DashBoardItem data={item} key={i} className={menuItemStyle} />
-          ))}
-        </ul>
-      </div>
-    </aside>
+    <Animation.Slide in={isOpen} placement="left">
+      <aside
+        className={` ${
+          isOpen ? "static" : "hidden"
+        } top-0 left-0 z-40 w-64 h-screen`}
+      >
+        <div className={`h-full px-3 py-4 overflow-y-auto bg-white`}>
+          <ul className="space-y-2 font-medium">
+            <li className="flex items-center justify-center">
+              {!isOpen ? (
+                <span className="font-serif text-4xl block text-center text-blue-600">
+                  S
+                </span>
+              ) : (
+                <Image
+                  src="/assets/images/schoolpre-high-resolution-logo-transparent.png"
+                  width={0}
+                  height={0}
+                  alt="logo"
+                  unoptimized
+                  className="h-20 w-auto "
+                />
+              )}
+            </li>
+            {menu_list.map((item, i) => (
+              <DashBoardItem data={item} key={i} className={menuItemStyle} />
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </Animation.Slide>
   );
 };
 // Single menuItems

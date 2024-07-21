@@ -6,11 +6,11 @@ const Page = () => {
   return (
     <div>
       <IntroCard />
-      <div className="w-full flex mt-8 gap-7">
+      <div className="w-full flex flex-col lg:flex-row mt-8 gap-7">
         <div className="flex-grow flex-1">
           <ClassSchedule />
         </div>
-        <div className="hidden">
+        <div className="">
           <ScheduleCalender />
         </div>
       </div>

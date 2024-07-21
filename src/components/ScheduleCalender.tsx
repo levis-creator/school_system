@@ -1,5 +1,6 @@
 "use client";
 import { Badge, Calendar } from "rsuite";
+import NoticeBoard from "./NoticeBoard";
 
 const ScheduleCalender = () => {
   const dateTime = [
@@ -48,8 +49,9 @@ const ScheduleCalender = () => {
       <Calendar
         compact
         renderCell={renderCell}
-        className="hidden w-96 p-3 shadow-md rounded-lg bg-white "
+        className="hidden lg:block w-96 p-3 shadow-md rounded-lg bg-white "
       />
+      <NoticeBoard />
     </>
   );
 };
