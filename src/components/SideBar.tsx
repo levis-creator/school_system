@@ -8,6 +8,7 @@ import {
   User,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 import { Animation } from "rsuite";
 interface SideBarProps {
@@ -19,12 +20,12 @@ const SideBar: FC<SideBarProps> = ({ isOpen, open_menu, windowWidth }) => {
   const menu_list: MenuItem[] = [
     {
       menu_title: "Dashboard",
-      menu_link: "#",
+      menu_link: "/",
       menu_icon: <LayoutDashboard />,
     },
     {
       menu_title: "Schedule",
-      menu_link: "#",
+      menu_link: "schedule",
       menu_icon: <CalendarDays />,
     },
     {
@@ -60,11 +61,9 @@ const SideBar: FC<SideBarProps> = ({ isOpen, open_menu, windowWidth }) => {
   return (
     <Animation.Slide in={isOpen} placement="left">
       <aside
-        className={` ${
-          isOpen ? "static" : "hidden"
-        } top-0 left-0 z-40 w-64 h-screen`}
+        className={` ${isOpen ? "fixed" : "hidden"} top-0 left-0 z-40 w-64`}
       >
-        <div className={`h-full px-3 py-4 overflow-y-auto bg-white`}>
+        <div className={`h-screen px-3 py-4 overflow-y-auto bg-white`}>
           <ul className="space-y-2 font-medium">
             <li className="flex items-center justify-center">
               {!isOpen ? (
@@ -101,13 +100,13 @@ const DashBoardItem = ({
 }) => {
   return (
     <li>
-      <a
-        href="#"
+      <Link
+        href={`/student/${data.menu_link}`}
         className="flex items-center p-2 text-gray-600 rounded-lg hover:bg-blue-100 group"
       >
         <div className="p-1">{data.menu_icon}</div>
         <span className={`ms-3 ${className}`}>{data.menu_title}</span>
-      </a>
+      </Link>
     </li>
   );
 };

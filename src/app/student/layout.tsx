@@ -12,17 +12,22 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const windowWidth = useWindowWidth();
 
   return (
-    <div className="flex">
+    <>
       <SideBar
         isOpen={isOpen}
         open_menu={handleMenu}
         windowWidth={windowWidth}
       />
-      <div className="flex-grow bg-slate-50">
+
+      <div
+        className={`${
+          isOpen ? "ml-64" : null
+        } flex-grow bg-slate-50 min-h-screen`}
+      >
         <NavBar open_menu={handleMenu} isOpen={isOpen} />
         <div className="p-3 sm:px-14 lg:px-16 lg:pt-12">{children}</div>
       </div>
-    </div>
+    </>
   );
 };
 
