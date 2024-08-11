@@ -1,5 +1,5 @@
 import ClassSchedule from "@/components/ClassSchedule";
-import IntroCard from "@/components/IntroCard";
+import IntroCard from "@/components/cards/IntroCard";
 import ScheduleCalender from "@/components/ScheduleCalender";
 
 const Page = () => {

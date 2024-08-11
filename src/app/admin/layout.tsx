@@ -3,7 +3,18 @@ import NavBar from "@/components/navigation/NavBar";
 import SideBar from "@/components/navigation/SideBar";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import React, { ReactNode, useState } from "react";
-import { CalendarDays, LayoutDashboard, Settings, User } from "lucide-react";
+import {
+  BookOpen,
+  CalendarDays,
+  CalendarRange,
+  GraduationCap,
+  LayoutDashboard,
+  ListTodo,
+  School,
+  Settings,
+  User,
+  Users,
+} from "lucide-react";
 import { MenuItem } from "@/utils/types";
 const Layout = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -18,14 +29,34 @@ const Layout = ({ children }: { children: ReactNode }) => {
       menu_icon: <LayoutDashboard />,
     },
     {
-      menu_title: "Schedule",
+      menu_title: "Students",
       menu_link: "schedule",
-      menu_icon: <CalendarDays />,
+      menu_icon: <GraduationCap />,
     },
     {
-      menu_title: "Grades",
+      menu_title: "Staffs",
       menu_link: "grades",
-      menu_icon: <LayoutDashboard />,
+      menu_icon: <Users />,
+    },
+    {
+      menu_title: "Departments",
+      menu_link: "grades",
+      menu_icon: <School />,
+    },
+    {
+      menu_title: "Classes",
+      menu_link: "grades",
+      menu_icon: <BookOpen />,
+    },
+    {
+      menu_title: "Subjects",
+      menu_link: "grades",
+      menu_icon: <ListTodo />,
+    },
+    {
+      menu_title: "Timetables",
+      menu_link: "grades",
+      menu_icon: <CalendarRange />,
     },
     {
       menu_title: "Profile",
@@ -38,11 +69,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
       menu_icon: <Settings />,
     },
   ];
-
   return (
     <>
       <SideBar
-        base_route="/student"
+        base_route="/admin"
         menu_list={menu_list}
         isOpen={isOpen}
         open_menu={handleMenu}

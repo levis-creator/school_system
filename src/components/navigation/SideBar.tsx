@@ -1,12 +1,4 @@
-import useWindowWidth from "@/hooks/useWindowWidth";
 import { MenuItem } from "@/utils/types";
-import {
-  CalendarDays,
-  LayoutDashboard,
-  Menu,
-  Settings,
-  User,
-} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -15,48 +7,17 @@ interface SideBarProps {
   isOpen: boolean;
   open_menu: () => void;
   windowWidth: number;
+  menu_list: MenuItem[];
+  base_route: string;
 }
-const SideBar: FC<SideBarProps> = ({ isOpen, open_menu, windowWidth }) => {
-  const menu_list: MenuItem[] = [
-    {
-      menu_title: "Dashboard",
-      menu_link: "/",
-      menu_icon: <LayoutDashboard />,
-    },
-    {
-      menu_title: "Schedule",
-      menu_link: "schedule",
-      menu_icon: <CalendarDays />,
-    },
-    {
-      menu_title: "Grades",
-      menu_link: "#",
-      menu_icon: <LayoutDashboard />,
-    },
-    {
-      menu_title: "Profiles",
-      menu_link: "#",
-      menu_icon: <User />,
-    },
-    {
-      menu_title: "Settings",
-      menu_link: "#",
-      menu_icon: <Settings />,
-    },
-  ];
+const SideBar: FC<SideBarProps> = ({
+  isOpen,
+  open_menu,
+  windowWidth,
+  menu_list,
+  base_route,
+}) => {
   let menuItemStyle = windowWidth >= 640 && isOpen === false ? "hidden" : "";
-  const handleOpenStyle = () => {
-    if (isOpen === true && windowWidth < 640) {
-      return "animate-entrance fixed";
-    } else if (isOpen === false && windowWidth < 640) {
-      return " animate-exit hidden";
-    } else if (isOpen === true) {
-      return "animate-entrance";
-    } else {
-      return "animate-exit w-fit";
-    }
-  };
-  const openStyle = handleOpenStyle();
 
   return (
     <Animation.Slide in={isOpen} placement="left">
@@ -94,14 +55,16 @@ const SideBar: FC<SideBarProps> = ({ isOpen, open_menu, windowWidth }) => {
 const DashBoardItem = ({
   data,
   className,
+  base_route,
 }: {
   data: MenuItem;
   className?: string;
+  base_route: string; // Base route for generating menu links  // Example: "/dashboard" or "/admin"
 }) => {
   return (
     <li>
       <Link
-        href={`/student/${data.menu_link}`}
+        href={`${base_route}/${data.menu_link}`}
         className="flex items-center p-2 text-gray-600 rounded-lg hover:bg-blue-100 group"
       >
         <div className="p-1">{data.menu_icon}</div>
