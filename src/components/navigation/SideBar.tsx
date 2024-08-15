@@ -43,7 +43,12 @@ const SideBar: FC<SideBarProps> = ({
               )}
             </li>
             {menu_list.map((item, i) => (
-              <DashBoardItem data={item} key={i} className={menuItemStyle} />
+              <DashBoardItem
+                base_route={base_route}
+                data={item}
+                key={i}
+                className={menuItemStyle}
+              />
             ))}
           </ul>
         </div>

@@ -2,10 +2,9 @@
 import NavBar from "@/components/navigation/NavBar";
 import SideBar from "@/components/navigation/SideBar";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import React, { ReactNode, useState } from "react";
+import { MenuItem } from "@/utils/types";
 import {
   BookOpen,
-  CalendarDays,
   CalendarRange,
   GraduationCap,
   LayoutDashboard,
@@ -15,9 +14,9 @@ import {
   User,
   Users,
 } from "lucide-react";
-import { MenuItem } from "@/utils/types";
+import { ReactNode, useState } from "react";
 const Layout = ({ children }: { children: ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const handleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -30,32 +29,32 @@ const Layout = ({ children }: { children: ReactNode }) => {
     },
     {
       menu_title: "Students",
-      menu_link: "schedule",
+      menu_link: "students",
       menu_icon: <GraduationCap />,
     },
     {
       menu_title: "Staffs",
-      menu_link: "grades",
+      menu_link: "staffs",
       menu_icon: <Users />,
     },
     {
       menu_title: "Departments",
-      menu_link: "grades",
+      menu_link: "departments",
       menu_icon: <School />,
     },
     {
       menu_title: "Classes",
-      menu_link: "grades",
+      menu_link: "classes",
       menu_icon: <BookOpen />,
     },
     {
       menu_title: "Subjects",
-      menu_link: "grades",
+      menu_link: "subjects",
       menu_icon: <ListTodo />,
     },
     {
       menu_title: "Timetables",
-      menu_link: "grades",
+      menu_link: "timetables",
       menu_icon: <CalendarRange />,
     },
     {
@@ -65,7 +64,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     },
     {
       menu_title: "Settings",
-      menu_link: "#",
+      menu_link: "settings",
       menu_icon: <Settings />,
     },
   ];
@@ -85,7 +84,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         } flex-grow bg-slate-50 min-h-screen`}
       >
         <NavBar open_menu={handleMenu} isOpen={isOpen} />
-        <div className="p-3 sm:px-14 lg:px-16 lg:pt-12">{children}</div>
+        <div className="px-5 p-3 sm:px-14 lg:px-16 lg:pt-12">{children}</div>
       </div>
     </>
   );

@@ -11,3 +11,12 @@ export interface ClassShedule {
   day: string;
   time: string;
 }
+
+export interface Student {
+  id?: number;
+  firstName: string;
+  lastName: string;
+  admissionDate: string;
+  gender?: string;
+  dateOfBirth?: string;
+}
