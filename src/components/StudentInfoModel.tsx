@@ -26,8 +26,8 @@ const StudentInfoModel: FC<StudentInfoModel> = ({
           <div className="flex justify-center items-center h-full">
             <h3 className="text-xl">Student Information</h3>
           </div>
-          <div className="mt-10">
-            <Avatar circle className="h-20 w-20 mx-auto flex" />
+          <div className="mt-10 flex justify-center items-center ">
+            <Avatar circle className="h-24 w-24 mx-auto " />
           </div>
           <div>
             <div className="text-center mt-1">
@@ -68,7 +68,7 @@ const StudentInfoModel: FC<StudentInfoModel> = ({
         <Button
           onClick={handleClose}
           appearance="primary"
-          className="bg-red-500 hover:bg-red-600"
+          className="!bg-red-500 hover:!bg-red-600"
         >
           Close
         </Button>

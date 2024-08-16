@@ -1,22 +1,13 @@
 "use client";
+import useWindowWidth from "@/hooks/useWindowWidth";
+import { getData } from "@/utils/getData";
 import { Student } from "@/utils/types";
-import { MoreHorizontalIcon } from "lucide-react";
-import { FC, useState } from "react";
-import {
-  Dropdown,
-  IconButton,
-  Pagination,
-  Panel,
-  Popover,
-  Table,
-  Whisper,
-} from "rsuite";
-import StudentInfoModel from "../StudentInfoModel";
+import { FC, useEffect, useState } from "react";
+import { Dropdown, Modal, Pagination, Panel, Popover, Table } from "rsuite";
 import EditStudent from "../EditStudent";
-interface StudentsProps {
-  data: Student[];
-}
-const StudentsTable: FC<StudentsProps> = ({ data }) => {
+import StudentInfoModel from "../StudentInfoModel";
+interface StudentsProps {}
+const StudentsTable: FC<StudentsProps> = () => {
   const { Column, HeaderCell, Cell } = Table;
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -24,7 +15,16 @@ const StudentsTable: FC<StudentsProps> = ({ data }) => {
   const [student, setStudent] = useState<Student | null>();
   const [editStudent, setEditStudent] = useState<Student | null>(null);
   const [edit, setEdit] = useState(false);
+  const [data, setData] = useState<Student[]>([]);
+  const [loading, setloading] = useState(true);
+  useEffect(() => {
+    getData("students").then((data) => {
+      setData(data);
+      setloading(false);
+    });
+  }, [edit]);
 
+  const width = useWindowWidth();
   const handleEdit = () => {
     setEdit(true);
     setEditStudent(student as Student);
@@ -51,49 +51,9 @@ const StudentsTable: FC<StudentsProps> = ({ data }) => {
     return i >= start && i < end;
   });
 
-  const renderMenu = (
-    {
-      onClose,
-      left,
-      top,
-      className,
-    }: { left?: any; top?: any; className?: string; onClose: () => void },
-    ref: any
-  ) => {
-    const handleSelect = (eventKey: any) => {
-      onClose();
-      console.log(eventKey);
-    };
-    return (
-      <Popover ref={ref} className={className} style={{ left, top }} full>
-        <Dropdown.Menu onSelect={handleSelect}>
-          <Dropdown.Item eventKey={1}>Info</Dropdown.Item>
-          <Dropdown.Item eventKey={2}>Edit</Dropdown.Item>
-          <Dropdown.Item eventKey={3}>Delete</Dropdown.Item>
-        </Dropdown.Menu>
-      </Popover>
-    );
-  };
-
-  const ActionCell = ({
-    rowData,
-    dataKey,
-    ...props
-  }: {
-    rowData?: any;
-    dataKey: any;
-  }) => {
-    return (
-      <Cell {...props} className="link-group">
-        <Whisper
-          placement="autoVerticalStart"
-          trigger="click"
-          speaker={renderMenu}
-        >
-          <IconButton appearance="subtle" icon={<MoreHorizontalIcon />} />
-        </Whisper>
-      </Cell>
-    );
+  const closingEditAfterUpdate = () => {
+    setEdit(false);
+    setEditStudent(null);
   };
 
   return (
@@ -109,6 +69,7 @@ const StudentsTable: FC<StudentsProps> = ({ data }) => {
       >
         <Table
           data={setdata}
+          loading={loading}
           className="w-full"
           height={500}
           onRowClick={(rowData) => handleOpenModel(rowData)}
@@ -117,11 +78,11 @@ const StudentsTable: FC<StudentsProps> = ({ data }) => {
             <HeaderCell>Id</HeaderCell>
             <Cell dataKey="id" />
           </Column>
-          <Column width={250}>
+          <Column width={150}>
             <HeaderCell>First Name</HeaderCell>
             <Cell dataKey="firstName" />
           </Column>
-          <Column width={250}>
+          <Column width={150}>
             <HeaderCell>Last Name</HeaderCell>
             <Cell dataKey="lastName" />
           </Column>
@@ -154,16 +115,49 @@ const StudentsTable: FC<StudentsProps> = ({ data }) => {
           />
         </div>
       </Panel>
-      {edit && (
+      {/* conditional modal */}
+      {edit === true && width > 768 ? (
         <div className="flex-1 basis-1/3">
           <EditStudent
+            closingEditAfterUpdate={closingEditAfterUpdate}
             edit={edit}
-            editData={editStudent as Student}
+            data={editStudent as Student}
             handleClose={handleEditClose}
           />
         </div>
-      )}
+      ) : edit === true && width < 768 ? (
+        <ModelEditStudent
+          closingEditAfterUpdate={closingEditAfterUpdate}
+          edit={edit}
+          data={editStudent as Student}
+          handleClose={handleEditClose}
+        />
+      ) : null}
     </div>
+  );
+};
+const ModelEditStudent = ({
+  data,
+  handleClose,
+  edit,
+  closingEditAfterUpdate,
+}: {
+  data?: Student;
+  handleClose?: () => void;
+  edit: boolean;
+  closingEditAfterUpdate: () => void;
+}) => {
+  return (
+    <Modal open>
+      <Modal.Body>
+        <EditStudent
+          closingEditAfterUpdate={closingEditAfterUpdate}
+          edit={edit}
+          data={data as Student}
+          handleClose={handleClose}
+        />
+      </Modal.Body>
+    </Modal>
   );
 };
 
