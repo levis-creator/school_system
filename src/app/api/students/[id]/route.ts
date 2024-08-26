@@ -15,7 +15,30 @@ export const PUT = async (
     }
   )
     .then((res) => {
-      return new Response("success", { status: res.status });
+      return NextResponse.json(res);
+    })
+    .catch((error) =>
+      NextResponse.json({
+        error,
+      })
+    );
+  return data;
+};
+
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { id: any } }
+) => {
+  const { id } = params;
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/students/${id}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }
+  )
+    .then((res) => {
+      return NextResponse.json(res);
     })
     .catch((error) =>
       NextResponse.json({

@@ -22,7 +22,7 @@ const TextInput: FC<TextInputProp> = ({
 }) => {
   return (
     <Form.Group controlId={name} className="w-full !mb-1">
-      <Form.ControlLabel className="text-sm">{label}</Form.ControlLabel>
+      <Form.ControlLabel className="!text-sm">{label}</Form.ControlLabel>
       <Form.Control
         required={required}
         placeholder={placeholder}

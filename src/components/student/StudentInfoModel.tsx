@@ -6,11 +6,14 @@ interface StudentInfoModel {
   handleClose: () => void;
   rowData: Student | null;
   handleEdit: () => void;
+  handleDelete?: (id: any) => void;
 }
 const StudentInfoModel: FC<StudentInfoModel> = ({
   open,
   handleClose,
   handleEdit,
+  // TODO: remove this when the action button is created
+  handleDelete,
   rowData,
 }) => {
   return (

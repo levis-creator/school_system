@@ -21,9 +21,7 @@ const SideBar: FC<SideBarProps> = ({
 
   return (
     <Animation.Slide in={isOpen} placement="left">
-      <aside
-        className={` ${isOpen ? "fixed" : "hidden"} top-0 left-0 z-40 w-64`}
-      >
+      <aside className={` ${!isOpen && "hidden"} fixed top-0 left-0 z-40 w-64`}>
         <div className={`h-screen px-3 py-4 overflow-y-auto bg-white`}>
           <ul className="space-y-2 font-medium">
             <li className="flex items-center justify-center">
@@ -43,12 +41,7 @@ const SideBar: FC<SideBarProps> = ({
               )}
             </li>
             {menu_list.map((item, i) => (
-              <DashBoardItem
-                base_route={base_route}
-                data={item}
-                key={i}
-                className={menuItemStyle}
-              />
+              <DashBoardItem base_route={base_route} data={item} key={i} />
             ))}
           </ul>
         </div>

@@ -1,42 +1,40 @@
 "use client";
 import { TypeAttributes } from "rsuite/esm/internals/types";
 
-export default async function editData(
+export default async function addData(
   endpoint: string,
   data: any,
-  id: any,
-  toast: (type: TypeAttributes.Status, message: string) => void,
-  setloading: (param: boolean) => void
+  setloading: (param: boolean) => void,
+  toast?: (type: TypeAttributes.Status, message: string) => void
 ) {
   setloading(true);
   console.log(data);
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   try {
-    const response = await fetch(`${baseUrl}/api/${endpoint}/${id}`, {
-      method: "PUT",
+    const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-
-    const responseText = await response.text(); // Await the text response
+    const responseText = await response.json(); // Await the text response
+    console.log(responseText);
 
     if (response.ok) {
       setloading(false);
-      toast("success", "Data updated successfully!");
+      toast?.("success", "Data updated successfully!");
 
       // Try to parse the response as JSON
       try {
-        const jsonData = JSON.parse(responseText);
-        return jsonData;
+        return responseText;
       } catch (e) {
         // Handle the case where the response is not valid JSON
         console.error("Failed to parse JSON:", e);
       }
     } else {
-      toast("error", "Error updating data " + response.status);
+      toast?.("error", "Error adding data " + response.status);
       setloading(false);
     }
   } catch (error) {

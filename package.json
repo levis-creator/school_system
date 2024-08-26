@@ -22,12 +22,14 @@
     "rsuite": "^5.67.0",
     "shadcn-ui": "^0.8.0",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@wixc3/react-board": "3.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

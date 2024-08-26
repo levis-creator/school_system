@@ -20,3 +20,13 @@ export interface Student {
   gender?: string;
   dateOfBirth?: string;
 }
+export interface Staff {
+  id?: number;
+  dateOfBirth?: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  nationalId: string;
+  entranceDate: string;
+  department?: string;
+}

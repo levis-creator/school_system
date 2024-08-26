@@ -84,7 +84,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         } flex-grow bg-slate-50 min-h-screen`}
       >
         <NavBar open_menu={handleMenu} isOpen={isOpen} />
-        <div className="px-5 p-3 sm:px-14 lg:px-16 lg:pt-12">{children}</div>
+        <div className="px-5 p-3 sm:px-14 lg:px-16 lg:pt-4">{children}</div>
       </div>
     </>
   );
