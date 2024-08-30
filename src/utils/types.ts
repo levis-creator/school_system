@@ -30,3 +30,11 @@ export interface Staff {
   entranceDate: string;
   department?: string;
 }
+export interface NextofKin {
+  id?: number;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  nationalId: string;
+  entranceDate: string;
+}

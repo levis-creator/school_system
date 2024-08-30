@@ -5,18 +5,20 @@ import { Button, Modal } from "rsuite";
 const DeleteAlert = ({
   title,
   deleteBtn,
+  handleCloseDelete,
+  isOpen,
 }: {
   title: string;
   deleteBtn?: () => void;
+  handleCloseDelete: () => void;
+  isOpen: boolean;
 }) => {
-  const { _delete, handleCloseDelete }: any = useStudentContext();
-
   return (
     <>
       <Modal
         backdrop="static"
         role="alertdialog"
-        open={_delete}
+        open={isOpen}
         onClose={handleCloseDelete}
         size="xs"
       >

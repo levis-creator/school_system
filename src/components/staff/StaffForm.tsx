@@ -35,11 +35,18 @@ const StaffForm: FC<StaffFormProps> = ({
         data={gender}
       />
       <TextInput
-        name="admissionDate"
-        label="Admission Date"
+        name="entranceDate"
+        label="Entrance Date"
         required={true}
         type="date"
       />
+      <TextInput
+        name="nationalId"
+        label="National ID"
+        required={true}
+        type="number"
+      />
+
       <Panel className="flex justify-end ">
         <Button appearance="primary" type="submit">
           Save

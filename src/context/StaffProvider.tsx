@@ -56,6 +56,7 @@ const StaffProvider = ({ children }: { children: ReactNode }) => {
       value={{
         _delete,
         staffs,
+        setStaff,
         handleEdit,
         handleCloseDelete,
         handleEditClose,

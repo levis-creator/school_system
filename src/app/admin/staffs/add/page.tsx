@@ -1,12 +1,11 @@
 import Head from "@/components/Head";
-import AddStudentForm from "@/components/student/AddStudentForm";
-import React from "react";
+import AddStaffForm from "@/components/staff/AddStaffForm";
 
 const Page = () => {
   return (
     <div>
-      <Head title="Add Student" back_btn />
-      <AddStudentForm />
+      <Head title="Add Staff" back_btn />
+      <AddStaffForm />
     </div>
   );
 };

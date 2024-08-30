@@ -26,6 +26,7 @@ const StaffsTable: FC<StaffsProps> = () => {
     handleEdit,
     handleEditClose,
     handleCloseDelete,
+    _delete,
   }: any = useStaffContext();
   const [loading, setloading] = useState(true);
 
@@ -40,7 +41,7 @@ const StaffsTable: FC<StaffsProps> = () => {
 
   const handleDelete = async () => {
     // handle delete
-    await deleteData(`students/${staff?.id}`, setloading, messageToast)
+    await deleteData(`staff/${staff?.id}`, setloading, messageToast)
       .then(() =>
         setStaffs(staffs.filter((item: any) => item.id !== staff?.id))
       )
@@ -54,7 +55,12 @@ const StaffsTable: FC<StaffsProps> = () => {
 
   return (
     <div className="flex gap-5">
-      <DeleteAlert title="Staff" deleteBtn={handleDelete} />
+      <DeleteAlert
+        isOpen={_delete}
+        handleCloseDelete={handleCloseDelete}
+        title="Staff"
+        deleteBtn={handleDelete}
+      />
       <StaffInfoModel
         handleEdit={handleEdit}
         open={openModel}
@@ -77,7 +83,7 @@ const StaffsTable: FC<StaffsProps> = () => {
           />
         </div>
       ) : edit === true && width < 768 ? (
-        <ModelEditStudent
+        <ModelEditStaff
           closingEditAfterUpdate={closingEditAfterUpdate}
           edit={edit}
           data={editStaff as Staff}
@@ -87,7 +93,7 @@ const StaffsTable: FC<StaffsProps> = () => {
     </div>
   );
 };
-const ModelEditStudent = ({
+const ModelEditStaff = ({
   data,
   handleClose,
   edit,

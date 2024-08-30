@@ -3,7 +3,6 @@ import { Student as Staff } from "@/utils/types";
 import { MoreHorizontal } from "lucide-react";
 import { FC, useState } from "react";
 import { Checkbox, Pagination, Table } from "rsuite";
-import { RowDataType } from "rsuite/esm/Table";
 import ActionCell from "./ActionCell";
 import CheckCell from "./CheckCell";
 

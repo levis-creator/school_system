@@ -26,6 +26,7 @@ const StudentsTable: FC<StudentsProps> = () => {
     handleEdit,
     handleEditClose,
     handleCloseDelete,
+    _delete,
   }: any = useStudentContext();
   const [loading, setloading] = useState(true);
 
@@ -54,7 +55,12 @@ const StudentsTable: FC<StudentsProps> = () => {
 
   return (
     <div className="flex gap-5">
-      <DeleteAlert title="Student" deleteBtn={handleDelete} />
+      <DeleteAlert
+        isOpen={_delete}
+        handleCloseDelete={handleCloseDelete}
+        title="Student"
+        deleteBtn={handleDelete}
+      />
       <StudentInfoModel
         handleEdit={handleEdit}
         handleDelete={handleDelete}
