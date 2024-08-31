@@ -3,7 +3,7 @@ import { Checkbox, Table } from "rsuite";
 const CheckCell = ({
   rowData,
   onChange,
-  checkedKeys,
+  checkedKeys = [],
   dataKey,
   ...props
 }: {

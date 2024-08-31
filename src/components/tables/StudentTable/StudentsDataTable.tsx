@@ -1,19 +1,13 @@
 "use client";
 import { Student } from "@/utils/types";
-import { MoreHorizontal, MoreVerticalIcon } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { FC, useState } from "react";
-import {
-  Checkbox,
-  Dropdown,
-  IconButton,
-  Pagination,
-  Popover,
-  Table,
-  Whisper,
-} from "rsuite";
+import { Checkbox, Pagination, Table } from "rsuite";
 import { RowDataType } from "rsuite/esm/Table";
 import ActionCell from "./ActionCell";
-import CheckCell from "./CheckCell";
+import CheckCell from "../CheckCell";
+import CustomPagination from "../CustomPagination";
+import useHandleData from "@/hooks/useHandleData";
 
 interface StudentTableProps {
   data: Student[];
@@ -23,50 +17,28 @@ interface StudentTableProps {
 }
 
 const StudentsDataTable: FC<StudentTableProps> = ({
-  data=[],
+  data = [],
   loading,
   displayHidden = false,
 }) => {
   const { Column, HeaderCell, Cell } = Table;
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const [checkedKeys, setCheckedKeys] = useState([]);
-  let checked = false;
-  let indeterminate = false;
 
-  if (checkedKeys.length === data.length) {
-    checked = true;
-  } else if (checkedKeys.length === 0) {
-    checked = false;
-  } else if (checkedKeys.length > 0 && checkedKeys.length < data.length) {
-    indeterminate = true;
-  }
-
-  const handleCheckAll = (value: any, checked: boolean) => {
-    const keys: any = checked ? data.map((item) => item.id) : [];
-    setCheckedKeys(keys);
-  };
-  const handleCheck = (value: any, checked: any) => {
-    const keys: any = checked
-      ? [...checkedKeys, value]
-      : checkedKeys.filter((item) => item !== value);
-    setCheckedKeys(keys);
-  };
-  const setdata =
-    data.filter((v, i) => {
-      const start = limit * (page - 1);
-      const end = start + limit;
-      return i >= start && i < end;
-    }) || [];
-
-  const handleChangeLimit = (dataKey: number) => {
-    setPage(1);
-    setLimit(dataKey);
-  };
+  const {
+    handleCheck,
+    handleCheckAll,
+    handleChangeLimit,
+    limit,
+    page,
+    checked,
+    indeterminate,
+    checkedKeys,
+    filteredData,
+    setPage,
+  } = useHandleData(data);
   return (
     <>
       <Table
-        data={setdata}
+        data={filteredData}
         loading={loading}
         className="w-full mb-3"
         height={500}
@@ -124,22 +96,12 @@ const StudentsDataTable: FC<StudentTableProps> = ({
         )}
       </Table>
       {/* TODO: Add action button and stick it to the right */}
-      <Pagination
-        prev
-        next
-        first
-        last
-        ellipsis
-        boundaryLinks
-        maxButtons={5}
-        size="xs"
-        layout={["total", "-", "limit", "|", "pager", "skip"]}
-        total={data.length}
-        limitOptions={[10, 30, 50]}
+      <CustomPagination
+        datalength={data.length}
         limit={limit}
-        activePage={page}
-        onChangePage={setPage}
-        onChangeLimit={handleChangeLimit}
+        page={page}
+        handleChangeLimit={handleChangeLimit}
+        setPage={setPage}
       />
     </>
   );

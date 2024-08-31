@@ -1,20 +1,18 @@
 "use client";
 import { Student as Staff } from "@/utils/types";
-import { MoreHorizontal } from "lucide-react";
-import { FC, useState } from "react";
-import { Checkbox, Pagination, Table } from "rsuite";
-import ActionCell from "./ActionCell";
-import CustomPagination from "../CustomPagination";
-import CheckCell from "../CheckCell";
+import { FC } from "react";
+import { Checkbox, Table } from "rsuite";
 import useHandleData from "@/hooks/useHandleData";
+import CheckCell from "../CheckCell";
+import CustomPagination from "../CustomPagination";
 
-interface StaffTableProps {
+interface DepartmentDataProps {
   data: Staff[];
   loading?: boolean;
   displayHidden?: boolean;
 }
 
-const StaffsDataTable: FC<StaffTableProps> = ({
+const DepartmentData: FC<DepartmentDataProps> = ({
   data = [],
   loading,
   displayHidden = false,
@@ -73,24 +71,10 @@ const StaffsDataTable: FC<StaffTableProps> = ({
           <HeaderCell>Gender</HeaderCell>
           <Cell dataKey="gender" />
         </Column>
-        {displayHidden && (
-          <Column width={200}>
-            <HeaderCell>National ID</HeaderCell>
-            <Cell dataKey="nationalId" />
-          </Column>
-        )}
         <Column width={200} flexGrow={1} align="center">
           <HeaderCell>Entrance Date</HeaderCell>
           <Cell dataKey="entranceDate" />
         </Column>
-        {displayHidden && (
-          <Column width={120} fixed="right">
-            <HeaderCell>
-              <MoreHorizontal />
-            </HeaderCell>
-            <ActionCell dataKey="id" />
-          </Column>
-        )}
       </Table>
       {/* TODO: Add action button and stick it to the right */}
       <CustomPagination
@@ -104,4 +88,4 @@ const StaffsDataTable: FC<StaffTableProps> = ({
   );
 };
 
-export default StaffsDataTable;
+export default DepartmentData;

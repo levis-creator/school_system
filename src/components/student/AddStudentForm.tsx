@@ -6,10 +6,12 @@ import { Panel } from "rsuite";
 import { gender } from "../form/static/static";
 import LoadUI from "../LoadUI";
 import StudentForm from "./StudentForm";
+import { Student } from "@/utils/types";
 
 const AddStudentForm = () => {
   const [loading, setloading] = useState(false);
-  const { student, setStudent, messageToast }: any = useStudentContext();
+  const [student, setStudent] = useState<Student | undefined>();
+  const { messageToast }: any = useStudentContext();
 
   const handleSubmit = async () => {
     await addData("students", student, setloading, messageToast).then((res) =>

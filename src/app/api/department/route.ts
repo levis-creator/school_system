@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export const POST = async (request: Request) => {
   const body = await request.json();
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/students`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/department`,
     {
       method: "POST",
       body: JSON.stringify(body),
@@ -24,7 +24,7 @@ export const POST = async (request: Request) => {
 export const GET = async (request: Request) => {
   try {
     const data = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/students`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/department`,
       {
         method: "GET",
         headers: {
@@ -34,7 +34,7 @@ export const GET = async (request: Request) => {
     ).then((data) => {
       return data.json();
     });
-    return Response.json(data);
+    return NextResponse.json(data);
   } catch (error) {
     NextResponse.json({
       error,

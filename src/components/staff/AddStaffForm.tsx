@@ -8,14 +8,16 @@ import { Panel } from "rsuite";
 import { useState } from "react";
 import addData from "@/utils/restfulfunctions/addData";
 import useGeneralContext from "@/hooks/useGeneralContext";
+import { useRouter } from "next/navigation";
 
 const AddStaffForm = () => {
   const [loading, setloading] = useState(false);
   const { setStaff, staff }: any = useStaffContext();
   const { messageToast }: any = useGeneralContext();
+  const router = useRouter();
   const handleSubmit = async () => {
-    await addData("staff", staff, setloading, messageToast).then((res) =>
-      console.log(res)
+    await addData("staff", staff, setloading, messageToast).then(() =>
+      router.push("/admin/staffs")
     );
   };
   return (

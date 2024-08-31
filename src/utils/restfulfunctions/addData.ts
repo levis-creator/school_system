@@ -8,7 +8,7 @@ export default async function addData(
   toast?: (type: TypeAttributes.Status, message: string) => void
 ) {
   setloading(true);
-  console.log(data);
+
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   try {
@@ -20,8 +20,6 @@ export default async function addData(
       body: JSON.stringify(data),
     });
     const responseText = await response.json(); // Await the text response
-    console.log(responseText);
-
     if (response.ok) {
       setloading(false);
       toast?.("success", "Data updated successfully!");
