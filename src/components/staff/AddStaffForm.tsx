@@ -1,33 +1,32 @@
 "use client";
 
-import useStaffContext from "@/hooks/useStaffContext";
-import { gender } from "../form/static/static";
-import StaffForm from "./StaffForm";
-import LoadUI from "../LoadUI";
-import { Panel } from "rsuite";
-import { useState } from "react";
-import addData from "@/utils/restfulfunctions/addData";
+import useDbHandler from "@/hooks/useDbHandler";
 import useGeneralContext from "@/hooks/useGeneralContext";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Panel } from "rsuite";
+import { gender } from "../form/static/static";
+import LoadUI from "../LoadUI";
+import StaffForm from "./StaffForm";
+import { Staff } from "@/utils/types";
 
 const AddStaffForm = () => {
-  const [loading, setloading] = useState(false);
-  const { setStaff, staff }: any = useStaffContext();
+  const [staff, setStaff] = useState<Staff | undefined>();
   const { messageToast }: any = useGeneralContext();
-  const router = useRouter();
-  const handleSubmit = async () => {
-    await addData("staff", staff, setloading, messageToast).then(() =>
-      router.push("/admin/staffs")
-    );
-  };
+  const { handleAdd, loading } = useDbHandler(
+    staff,
+    "staff",
+    "/admin/staffs",
+    messageToast
+  );
+
   return (
     <div className="flex  w-full">
       {loading && <LoadUI />}
       <Panel className="bg-white w-[40em] shadow-md mx-auto px-6 py-4">
         <StaffForm
           gender={gender}
-          handleSubmit={handleSubmit}
-          staff={staff}
+          handleSubmit={handleAdd}
+          staff={staff as Staff}
           setStaff={setStaff}
         />
       </Panel>

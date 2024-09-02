@@ -7,17 +7,17 @@ import { gender } from "../form/static/static";
 import LoadUI from "../LoadUI";
 import StudentForm from "./StudentForm";
 import { Student } from "@/utils/types";
+import useDbHandler from "@/hooks/useDbHandler";
 
 const AddStudentForm = () => {
-  const [loading, setloading] = useState(false);
   const [student, setStudent] = useState<Student | undefined>();
   const { messageToast }: any = useStudentContext();
-
-  const handleSubmit = async () => {
-    await addData("students", student, setloading, messageToast).then((res) =>
-      console.log(res)
-    );
-  };
+  const { handleAdd, loading } = useDbHandler(
+    student,
+    "students",
+    "/admin/students",
+    messageToast
+  );
   return (
     // TODO: Add validation
     <div className="flex  w-full">
@@ -25,8 +25,8 @@ const AddStudentForm = () => {
       <Panel className="bg-white w-[40em] shadow-md mx-auto px-6 py-4">
         <StudentForm
           gender={gender}
-          handleSubmit={handleSubmit}
-          student={student}
+          handleSubmit={handleAdd}
+          student={student as Student}
           setStudent={setStudent}
         />
       </Panel>

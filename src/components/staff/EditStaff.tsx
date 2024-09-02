@@ -8,6 +8,7 @@ import { Staff } from "../../utils/types";
 import LoadUI from "../LoadUI";
 import StaffForm from "./StaffForm";
 import { gender } from "../form/static/static";
+import useDbHandler from "@/hooks/useDbHandler";
 interface EditStaffProps {
   data?: Staff;
   handleClose?: () => void;
@@ -28,9 +29,13 @@ const EditStaff: FC<EditStaffProps> = ({
     dateOfBirth: "",
     nationalId: "",
   });
-  const [loading, setloading] = useState(false);
   const { messageToast }: any = useStaffContext();
-
+  const { handleEdit, loading } = useDbHandler(
+    staff,
+    "staff",
+    "",
+    messageToast
+  );
   useEffect(() => {
     setStaff({
       firstName: `${data?.firstName || ""}`,
@@ -43,13 +48,8 @@ const EditStaff: FC<EditStaffProps> = ({
   }, [data]);
 
   const handleSubmit = async () => {
-    await editData(
-      "staff",
-      staff,
-      data?.id as unknown as string,
-      messageToast,
-      setloading
-    ).then(() => closingEditAfterUpdate());
+    handleEdit(data?.id);
+    closingEditAfterUpdate();
   };
 
   return (
