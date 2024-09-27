@@ -1,7 +1,7 @@
 import Head from "@/components/Head";
 import StaffsTable from "@/components/staff/StaffTable";
 import AddStudentCsv from "@/components/student/AddStudentCsv";
-import StudentsTable from "@/components/student/StudentsTable";
+import { getData } from "@/utils/restfulfunctions/getData";
 
 const Page = async () => {
   return (

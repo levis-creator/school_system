@@ -3,6 +3,7 @@ import { TypeAttributes } from "rsuite/esm/internals/types";
 
 export default async function deleteData(
   endpoint: string,
+  id: any,
   setloading: (param: boolean) => void,
   toast?: (type: TypeAttributes.Status, message: string) => void
 ) {
@@ -10,7 +11,7 @@ export default async function deleteData(
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   try {
-    const response = await fetch(`${baseUrl}/api/${endpoint}`, {
+    const response = await fetch(`${baseUrl}/api/${endpoint}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

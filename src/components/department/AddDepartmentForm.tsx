@@ -6,10 +6,10 @@ import { useState } from "react";
 import { Panel } from "rsuite";
 import { gender } from "../form/static/static";
 import LoadUI from "../LoadUI";
-import StaffForm from "./StaffForm";
+import DepartmentForm from "./DepartmentForm";
 import { Staff } from "@/utils/types";
 
-const AddStaffForm = () => {
+const AddDepartmentForm = () => {
   const [staff, setStaff] = useState<Staff | undefined>();
   const { messageToast }: any = useGeneralContext();
   const { handleAdd, loading } = useDbHandler(
@@ -23,7 +23,7 @@ const AddStaffForm = () => {
     <div className="flex  w-full">
       {loading && <LoadUI />}
       <Panel className="bg-white w-[40em] shadow-md mx-auto px-6 py-4">
-        <StaffForm
+        <DepartmentForm
           gender={gender}
           handleSubmit={handleAdd}
           staff={staff as Staff}
@@ -34,4 +34,4 @@ const AddStaffForm = () => {
   );
 };
 
-export default AddStaffForm;
+export default AddDepartmentForm;

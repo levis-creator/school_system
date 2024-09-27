@@ -1,14 +1,13 @@
 "use client";
+import useDbHandler from "@/hooks/useDbHandler";
 import useStaffContext from "@/hooks/useStaffContext";
-import editData from "@/utils/restfulfunctions/editData";
 import { FC, useEffect, useState } from "react";
 import { Animation, Panel } from "rsuite";
 import { DIMENSION } from "rsuite/esm/Animation/Collapse";
 import { Staff } from "../../utils/types";
-import LoadUI from "../LoadUI";
-import StaffForm from "./StaffForm";
 import { gender } from "../form/static/static";
-import useDbHandler from "@/hooks/useDbHandler";
+import LoadUI from "../LoadUI";
+import DepartmentForm from "./DepartmentForm";
 interface EditStaffProps {
   data?: Staff;
   handleClose?: () => void;
@@ -53,7 +52,7 @@ const EditStaff: FC<EditStaffProps> = ({ data, handleClose, edit }) => {
       <Panel className="bg-white shadow-md relative">
         {loading && <LoadUI />}
         <h2 className="text-gray-600 ">Edit Student</h2>
-        <StaffForm
+        <DepartmentForm
           gender={gender}
           handleSubmit={handleSubmit}
           staff={staff as Staff}

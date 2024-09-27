@@ -1,16 +1,15 @@
 "use client";
+import useDbHandler from "@/hooks/useDbHandler";
 import useStaffContext from "@/hooks/useStaffContext";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import deleteData from "@/utils/restfulfunctions/deleteData";
 import { getData } from "@/utils/restfulfunctions/getData";
 import { Staff } from "@/utils/types";
 import { FC, useEffect, useState } from "react";
 import { Modal, Panel } from "rsuite";
 import DeleteAlert from "../DeleteAlert";
 import StaffsDataTable from "../tables/StaffTable/StaffDataTable";
-import EditStaff from "./EditStaff";
-import StaffInfoModel from "./StaffInfoModel";
-import useDbHandler from "@/hooks/useDbHandler";
+import StaffInfoModel from "./DepartmentInfoModel";
+import EditStaff from "./EditDepartment";
 interface StaffsProps {}
 const StaffsTable: FC<StaffsProps> = () => {
   const {

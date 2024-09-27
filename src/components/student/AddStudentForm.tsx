@@ -13,8 +13,8 @@ const AddStudentForm = () => {
   const [student, setStudent] = useState<Student | undefined>();
   const { messageToast }: any = useStudentContext();
   const { handleAdd, loading } = useDbHandler(
-    student,
     "students",
+    student,
     "/admin/students",
     messageToast
   );

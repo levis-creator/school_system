@@ -1,11 +1,12 @@
 import addData from "@/utils/restfulfunctions/addData";
+import deleteData from "@/utils/restfulfunctions/deleteData";
 import editData from "@/utils/restfulfunctions/editData";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const useDbHandler = (
-  data: any,
   endpoint: string,
+  data?: any,
   back?: string,
   messageToast?: any
 ) => {
@@ -20,9 +21,12 @@ const useDbHandler = (
   };
   // this function will be called when editing data
   const handleEdit = async (id: any) => {
-    await editData("staff", data, id, messageToast, setloading);
+    await editData(endpoint, data, id, messageToast, setloading);
+  };
+  const handleDelete = async (id: any) => {
+    await deleteData(endpoint, id, setloading, messageToast);
   };
 
-  return { handleAdd, handleEdit, loading };
+  return { handleAdd, handleEdit, handleDelete, loading };
 };
 export default useDbHandler;
